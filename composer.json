@@ -1,0 +1,31 @@
+{
+    "name": "zeineddin/zf-doctrine-extensions",
+    "description": "Zend Framework 2 module to use the DoctrineExtensions in https://github.com/ZeinEddin/DoctrineExtensions",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/ZeinEddin/ZfDoctrineExtensions",
+    "keywords": [
+        "zf2",
+        "module",
+        "doctrine2",
+        "doctrine-module",
+        "doctrine-orm-module",
+    ],
+    "authors": [
+        {
+            "name": "Mohammad ZeinEddin",
+            "email": "mohammad@zeineddin.name",
+            "homepage": "http://www.zeineddin.name/"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3",
+        "zeineddin/doctrine-extensions": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
