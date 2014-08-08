@@ -33,8 +33,8 @@ class Utils
     public static function getOracleDQLFunctions()
     {
         return array(
-            'Nvl' => 'DoctrineExtensions\Query\Oracle\Nvl'
-            'ToDate' => 'DoctrineExtensions\Query\Oracle\ToDate'
+            'Nvl' => 'DoctrineExtensions\Query\Oracle\Nvl',
+            'ToDate' => 'DoctrineExtensions\Query\Oracle\ToDate',
             'TruncDate' => 'DoctrineExtensions\Query\Oracle\Trunc',
         );
     }
