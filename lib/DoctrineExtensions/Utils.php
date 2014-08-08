@@ -33,18 +33,26 @@ class Utils
     public static function getOracleDQLFunctions()
     {
         return array(
-            'Nvl' => 'DoctrineExtensions\Query\Oracle\Nvl',
-            'ToDate' => 'DoctrineExtensions\Query\Oracle\ToDate',
-            'TruncDate' => 'DoctrineExtensions\Query\Oracle\Trunc',
+            'datetime_functions' => array(
+                'Nvl' => 'DoctrineExtensions\Query\Oracle\Nvl',
+                'ToDate' => 'DoctrineExtensions\Query\Oracle\ToDate',
+                'TruncDate' => 'DoctrineExtensions\Query\Oracle\Trunc',
+            ),
+            'string_functions' => array(),
+            'numeric_functions' => array(),
         );
     }
     
     public static function getMySQLDQLFunctions()
     {
         return array(
-            'TimeDiff' => 'DoctrineExtensions\Query\Mysql\TimeDiff',
-            'TimeToSec' => 'DoctrineExtensions\Query\Mysql\TimeToSec',
-            'SecToTime' => 'DoctrineExtensions\Query\Mysql\SecToTime',
+            'datetime_functions' => array(
+                'TimeDiff' => 'DoctrineExtensions\Query\Mysql\TimeDiff',
+                'TimeToSec' => 'DoctrineExtensions\Query\Mysql\TimeToSec',
+                'SecToTime' => 'DoctrineExtensions\Query\Mysql\SecToTime',
+            ),
+            'string_functions' => array(),
+            'numeric_functions' => array(),
         );
     }
 }
