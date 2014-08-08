@@ -39,6 +39,9 @@ class TruncDate extends FunctionNode
     private $date;
     private $fmt = null;
 
+    /**
+     * {@inheritDoc}
+     */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         $sql = 'TRUNC(' . $this->date->dispatch($sqlWalker);
@@ -49,6 +52,9 @@ class TruncDate extends FunctionNode
         $sql .= ')';
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function parse(\Doctrine\ORM\Query\Parser $parser)
     {
         $lexer = $parser->getLexer();

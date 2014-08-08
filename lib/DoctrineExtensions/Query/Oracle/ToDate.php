@@ -40,6 +40,9 @@ class ToDate extends FunctionNode
     private $fmt = null;
     private $nlsparam = null;
 
+    /**
+     * {@inheritDoc}
+     */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         $sql = 'TO_DATE(' . $this->date->dispatch($sqlWalker);
@@ -55,6 +58,9 @@ class ToDate extends FunctionNode
         $sql .= ')';
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function parse(\Doctrine\ORM\Query\Parser $parser)
     {
         $lexer = $parser->getLexer();

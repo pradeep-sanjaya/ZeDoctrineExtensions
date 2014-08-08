@@ -40,6 +40,9 @@ class Nvl extends FunctionNode
     private $expr1;
     private $expr2;
 
+    /**
+     * {@inheritDoc}
+     */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
@@ -49,6 +52,9 @@ class Nvl extends FunctionNode
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function parse(\Doctrine\ORM\Query\Parser $parser)
     {
         $parser->match(Lexer::T_IDENTIFIER);
