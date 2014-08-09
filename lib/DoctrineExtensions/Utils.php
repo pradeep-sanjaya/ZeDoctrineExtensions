@@ -36,7 +36,7 @@ class Utils
             'datetime_functions' => array(
                 'Nvl' => 'DoctrineExtensions\Query\Oracle\Nvl',
                 'ToDate' => 'DoctrineExtensions\Query\Oracle\ToDate',
-                'TruncDate' => 'DoctrineExtensions\Query\Oracle\Trunc',
+                'TruncDate' => 'DoctrineExtensions\Query\Oracle\TruncDate',
             ),
             'string_functions' => array(),
             'numeric_functions' => array(),
