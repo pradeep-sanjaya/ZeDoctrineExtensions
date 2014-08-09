@@ -1,9 +1,9 @@
 {
-    "name": "zeineddin/doctrine-extensions",
+    "name": "zeineddin/ze-doctrine-extensions",
     "description": "A set of Doctrine 2 extensions http://www.doctrine-project.org",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/ZeinEddin/DoctrineExtensions",
+    "homepage": "https://github.com/ZeinEddin/ZeDoctrineExtensions",
     "keywords": [
         "doctrine2"
     ],
