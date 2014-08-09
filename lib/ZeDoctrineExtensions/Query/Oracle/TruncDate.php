@@ -50,6 +50,8 @@ class TruncDate extends FunctionNode
             $sql .= ',' . $this->fmt->dispatch($sqlWalker);
         }
         $sql .= ')';
+        
+        return $sql;
     }
 
     /**

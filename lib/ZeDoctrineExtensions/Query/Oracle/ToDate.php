@@ -56,6 +56,8 @@ class ToDate extends FunctionNode
             }
         }
         $sql .= ')';
+        
+        return $sql;
     }
 
     /**
