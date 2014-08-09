@@ -1,6 +1,6 @@
 <?php
 /**
- * DoctrineExtensions Oracle Function Pack
+ * ZeDoctrineExtensions MySQL Function Pack
  * 
  * PHP version 5
  *
@@ -15,30 +15,27 @@
  * 
  */
 
-namespace DoctrineExtensions\Query\Oracle;
+namespace ZeDoctrineExtensions\Query\MySQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * Nvl(expr1, expr2)
+ * TimeToSec(time)
  *
- * NVL lets you replace null (returned as a blank) with a string in the results 
- * of a query. If expr1 is null, then NVL returns expr2. If expr1 is not null, 
- * then NVL returns expr1.
+ * Returns the time argument, converted to seconds. 
  * More info:
- * http://docs.oracle.com/database/121/SQLRF/functions130.htm#SQLRF00684
+ * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_time-to-sec
  *
- * @category    DoctrineExtensions
- * @package     DoctrineExtensions\Query\Oracle
+ * @category    ZeDoctrineExtensions
+ * @package     ZeDoctrineExtensions\Query\MySQL
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
  * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
  */
 
-class Nvl extends FunctionNode
+class TimeToSec extends FunctionNode
 {
-    private $expr1;
-    private $expr2;
+    public $time;
 
     /**
      * {@inheritDoc}
@@ -46,9 +43,8 @@ class Nvl extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'NVL(%s, %s)',
-            $sqlWalker->walkArithmeticPrimary($this->expr1),
-            $sqlWalker->walkArithmeticPrimary($this->expr2)
+            'TIME_TO_SEC(%s)',
+            $this->time->dispatch($sqlWalker)
         );
     }
 
@@ -59,9 +55,7 @@ class Nvl extends FunctionNode
     {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
-        $this->expr1 = $parser->ArithmeticPrimary();
-        $parser->match(Lexer::T_COMMA);
-        $this->expr2 = $parser->ArithmeticPrimary();
+        $this->time = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }

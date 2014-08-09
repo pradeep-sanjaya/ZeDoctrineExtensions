@@ -1,6 +1,6 @@
 <?php
 /**
- * DoctrineExtensions MySQL Function Pack
+ * ZeDoctrineExtensions MySQL Function Pack
  * 
  * PHP version 5
  *
@@ -15,7 +15,7 @@
  * 
  */
 
-namespace DoctrineExtensions\Query\MySQL;
+namespace ZeDoctrineExtensions\Query\MySQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
@@ -29,8 +29,8 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
  * More info:
  * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_sec-to-time
  *
- * @category    DoctrineExtensions
- * @package     DoctrineExtensions\Query\MySQL
+ * @category    ZeDoctrineExtensions
+ * @package     ZeDoctrineExtensions\Query\MySQL
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
  * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
  */

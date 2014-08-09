@@ -1,6 +1,6 @@
 <?php
 /**
- * DoctrineExtensions Function Pack Map Utility
+ * ZeDoctrineExtensions Function Pack Map Utility
  * 
  * PHP version 5
  *
@@ -15,15 +15,15 @@
  * 
  */
 
-namespace DoctrineExtensions;
+namespace ZeDoctrineExtensions;
 
 /**
  * Get the Database custome DQL functions
  *
  * Get the name=>class of the custome DQL functions.
  *
- * @category    DoctrineExtensions
- * @package     DoctrineExtensions
+ * @category    ZeDoctrineExtensions
+ * @package     ZeDoctrineExtensions
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
  * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
  */
@@ -34,9 +34,9 @@ class Utils
     {
         return array(
             'datetime_functions' => array(
-                'Nvl' => 'DoctrineExtensions\Query\Oracle\Nvl',
-                'ToDate' => 'DoctrineExtensions\Query\Oracle\ToDate',
-                'TruncDate' => 'DoctrineExtensions\Query\Oracle\TruncDate',
+                'Nvl' => 'ZeDoctrineExtensions\Query\Oracle\Nvl',
+                'ToDate' => 'ZeDoctrineExtensions\Query\Oracle\ToDate',
+                'TruncDate' => 'ZeDoctrineExtensions\Query\Oracle\TruncDate',
             ),
             'string_functions' => array(),
             'numeric_functions' => array(),
@@ -47,9 +47,9 @@ class Utils
     {
         return array(
             'datetime_functions' => array(
-                'TimeDiff' => 'DoctrineExtensions\Query\Mysql\TimeDiff',
-                'TimeToSec' => 'DoctrineExtensions\Query\Mysql\TimeToSec',
-                'SecToTime' => 'DoctrineExtensions\Query\Mysql\SecToTime',
+                'TimeDiff' => 'ZeDoctrineExtensions\Query\Mysql\TimeDiff',
+                'TimeToSec' => 'ZeDoctrineExtensions\Query\Mysql\TimeToSec',
+                'SecToTime' => 'ZeDoctrineExtensions\Query\Mysql\SecToTime',
             ),
             'string_functions' => array(),
             'numeric_functions' => array(),

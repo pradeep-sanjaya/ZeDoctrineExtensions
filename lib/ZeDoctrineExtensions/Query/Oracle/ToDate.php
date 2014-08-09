@@ -1,6 +1,6 @@
 <?php
 /**
- * DoctrineExtensions Oracle Function Pack
+ * ZeDoctrineExtensions Oracle Function Pack
  * 
  * PHP version 5
  *
@@ -15,39 +15,45 @@
  * 
  */
 
-namespace DoctrineExtensions\Query\Oracle;
+namespace ZeDoctrineExtensions\Query\Oracle;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * TruncDate(date, fmt)
+ * ToDate(date, fmt, nlsparam)
  *
- * The TRUNC (date) function returns date with the time portion of the day 
- * truncated to the unit specified by the format model fmt.
+ * TO_DATE converts char of CHAR, VARCHAR2, NCHAR, or NVARCHAR2 data type 
+ * to a value of DATE data type.
  * More info:
- * http://docs.oracle.com/database/121/SQLRF/functions235.htm#SQLRF06151
+ * http://docs.oracle.com/database/121/SQLRF/functions218.htm#SQLRF06132
  *
- * @category    DoctrineExtensions
- * @package     DoctrineExtensions\Query\Oracle
+ * @category    ZeDoctrineExtensions
+ * @package     ZeDoctrineExtensions\Query\Oracle
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
  * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
  */
 
-class TruncDate extends FunctionNode
+class ToDate extends FunctionNode
 {
     private $date;
     private $fmt = null;
+    private $nlsparam = null;
 
     /**
      * {@inheritDoc}
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        $sql = 'TRUNC(' . $this->date->dispatch($sqlWalker);
+        $sql = 'TO_DATE(' . $this->date->dispatch($sqlWalker);
         // use second format parameter if parsed
         if (null !== $this->fmt) {
             $sql .= ',' . $this->fmt->dispatch($sqlWalker);
+            
+            // use third nlsparam parameter if parsed
+            if (null !== $this->nlsparam) {
+                $sql .= ',' . $this->nlsparam->dispatch($sqlWalker);
+            }
         }
         $sql .= ')';
     }
@@ -66,6 +72,12 @@ class TruncDate extends FunctionNode
         if (Lexer::T_COMMA === $lexer->lookahead['type']) {
             $parser->match(Lexer::T_COMMA);
             $this->fmt = $parser->ArithmeticPrimary();
+            
+            // parse third nlsparam parameter if available
+            if (Lexer::T_COMMA === $lexer->lookahead['type']) {
+                $parser->match(Lexer::T_COMMA);
+                $this->nlsparam = $parser->ArithmeticPrimary();
+            }
         }
         
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
