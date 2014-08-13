@@ -47,9 +47,10 @@ class Utils
     {
         return array(
             'datetime_functions' => array(
+                'Date' => 'ZeDoctrineExtensions\Query\MySQL\Date',
+                'SecToTime' => 'ZeDoctrineExtensions\Query\MySQL\SecToTime',
                 'TimeDiff' => 'ZeDoctrineExtensions\Query\MySQL\TimeDiff',
                 'TimeToSec' => 'ZeDoctrineExtensions\Query\MySQL\TimeToSec',
-                'SecToTime' => 'ZeDoctrineExtensions\Query\MySQL\SecToTime',
             ),
             'string_functions' => array(),
             'numeric_functions' => array(),
