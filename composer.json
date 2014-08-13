@@ -19,6 +19,6 @@
         "doctrine/orm": "*"
     },
     "autoload": {
-        "psr-0": {"ZeDoctrineExtensions" : "lib/"}
+        "psr-0": {"ZeDoctrineExtensions\\" : "lib/"}
     }
 }
