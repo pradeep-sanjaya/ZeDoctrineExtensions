@@ -11,14 +11,16 @@
         {
             "name": "Mohammad ZeinEddin",
             "email": "mohammad@zeineddin.name",
-            "homepage": "http://www.zeineddin.name/"
+            "homepage": "http://www.zeineddin.name/",
+            "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "doctrine/orm": "*"
     },
     "autoload": {
-        "psr-0": {"ZeDoctrineExtensions\\" : "lib/"}
+        "psr-0": {
+            "ZeDoctrineExtensions\\" : "lib/"
+        }
     }
 }
