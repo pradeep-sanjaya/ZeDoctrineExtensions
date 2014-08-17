@@ -54,6 +54,7 @@ class Utils
             ),
             'string_functions' => array(
                 'IfNull' => 'ZeDoctrineExtensions\Query\MySQL\IfNull',
+                'NullIf' => 'ZeDoctrineExtensions\Query\MySQL\NullIf',
             ),
             'numeric_functions' => array(),
         );
