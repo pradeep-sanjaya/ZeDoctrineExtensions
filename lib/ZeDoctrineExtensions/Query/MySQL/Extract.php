@@ -45,7 +45,7 @@ class Extract extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'DATE(%s from %s)',
+            'EXTRACT(%s from %s)',
             $this->unit->dispatch($sqlWalker),
             $this->date->dispatch($sqlWalker)
         );
