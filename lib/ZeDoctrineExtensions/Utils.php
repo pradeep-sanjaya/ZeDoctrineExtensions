@@ -52,6 +52,7 @@ class Utils
                 'TimeDiff' => 'ZeDoctrineExtensions\Query\MySQL\TimeDiff',
                 'TimeToSec' => 'ZeDoctrineExtensions\Query\MySQL\TimeToSec',
                 'StrToDate' => 'ZeDoctrineExtensions\Query\MySQL\StrToDate',
+                'Extract' => 'ZeDoctrineExtensions\Query\MySQL\Extract',
             ),
             'string_functions' => array(
                 'IfNull' => 'ZeDoctrineExtensions\Query\MySQL\IfNull',
