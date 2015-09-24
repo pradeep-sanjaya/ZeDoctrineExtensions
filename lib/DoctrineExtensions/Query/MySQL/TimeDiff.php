@@ -1,6 +1,6 @@
 <?php
 /**
- * ZeDoctrineExtensions MySQL Function Pack
+ * DoctrineExtensions MySQL Function Pack
  * 
  * PHP version 5
  *
@@ -15,27 +15,29 @@
  * 
  */
 
-namespace ZeDoctrineExtensions\Query\MySQL;
+namespace DoctrineExtensions\Query\MySQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * Date(expr)
+ * TimeDiff(expr1, expr2)
  *
- * Extracts the date part of the date or datetime expression expr. 
+ * returns expr1 - expr2 expressed as a time value. expr1 and expr2 are time 
+ * or date-and-time expressions, but both must be of the same type.
  * More info:
- * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_date
+ * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_timediff
  *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\MySQL
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\MySQL
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
-class Date extends FunctionNode
+class TimeDiff extends FunctionNode
 {
-    public $expr;
+    public $firstTimeExpression = null;
+    public $secondTimeExpression = null;
 
     /**
      * {@inheritDoc}
@@ -43,8 +45,9 @@ class Date extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'DATE(%s)',
-            $this->expr->dispatch($sqlWalker)
+            'TIMEDIFF(%s, %s)',
+            $this->firstTimeExpression->dispatch($sqlWalker),
+            $this->secondTimeExpression->dispatch($sqlWalker)
         );
     }
 
@@ -55,7 +58,9 @@ class Date extends FunctionNode
     {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
-        $this->expr = $parser->ArithmeticPrimary();
+        $this->firstTimeExpression = $parser->ArithmeticPrimary();
+        $parser->match(Lexer::T_COMMA);
+        $this->secondTimeExpression = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }

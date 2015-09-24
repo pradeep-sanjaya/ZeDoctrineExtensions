@@ -1,9 +1,9 @@
 {
-    "name": "pradeep-sanjaya/ZeDoctrineExtensions",
+    "name": "pradeep-sanjaya/doctrine-extensions",
     "description": "A set of Doctrine 2 extensions http://www.doctrine-project.org",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/pradeep-sanjaya/ZeDoctrineExtensions",
+    "homepage": "https://github.com/pradeep-sanjaya/doctrine-extensions",
     "keywords": [
         "doctrine2"
     ],
@@ -20,7 +20,10 @@
     },
     "autoload": {
         "psr-0": {
-            "ZeDoctrineExtensions\\" : "lib/"
-        }
+            "DoctrineExtensions\\" : "lib/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
     }
 }

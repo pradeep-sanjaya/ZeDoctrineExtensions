@@ -1,6 +1,6 @@
 <?php
 /**
- * ZeDoctrineExtensions MySQL Function Pack
+ * DoctrineExtensions Oracle Function Pack
  * 
  * PHP version 5
  *
@@ -15,30 +15,30 @@
  * 
  */
 
-namespace ZeDoctrineExtensions\Query\MySQL;
+namespace DoctrineExtensions\Query\Oracle;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * IFNULL(expr1, expr2)
+ * Translate(expr, from_string, to_string)
  *
- * If expr1 is not NULL, IFNULL() returns expr1; otherwise it returns expr2. 
- * IFNULL() returns a numeric or string value, depending on the context in 
- * which it is used.
+ * TRANSLATE returns expr with all occurrences of each character in from_string 
+ * replaced by its corresponding character in to_string. 
  * More info:
- * https://dev.mysql.com/doc/refman/5.5/en/control-flow-functions.html#function_ifnull
+ * http://docs.oracle.com/database/121/SQLRF/functions231.htm#SQLRF06145
  *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\MySQL
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\Oracle
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
-class IfNull extends FunctionNode
+class Translate extends FunctionNode
 {
-    private $expr1;
-    private $expr2;
+    private $expr;
+    private $fromString;
+    private $toString;
 
     /**
      * {@inheritDoc}
@@ -46,9 +46,10 @@ class IfNull extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'IFNULL(%s, %s)',
-            $sqlWalker->walkArithmeticPrimary($this->expr1),
-            $sqlWalker->walkArithmeticPrimary($this->expr2)
+            'TRANSLATE(%s, %s, %s)',
+            $sqlWalker->walkArithmeticPrimary($this->expr),
+            $sqlWalker->walkArithmeticPrimary($this->fromString),
+            $sqlWalker->walkArithmeticPrimary($this->toString)
         );
     }
 
@@ -59,9 +60,11 @@ class IfNull extends FunctionNode
     {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
-        $this->expr1 = $parser->ArithmeticPrimary();
+        $this->expr = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_COMMA);
-        $this->expr2 = $parser->ArithmeticPrimary();
+        $this->fromString = $parser->ArithmeticPrimary();
+        $parser->match(Lexer::T_COMMA);
+        $this->toString = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
- * ZeDoctrineExtensions MySQL Function Pack
- * 
+ * DoctrineExtensions Oracle Function Pack
+ *
  * PHP version 5
  *
  * LICENSE:
@@ -12,30 +12,26 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- * 
+ *
  */
 
-namespace ZeDoctrineExtensions\Query\MySQL;
+namespace DoctrineExtensions\Query\Oracle;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * TimeToSec(time)
+ * ToNumber(expr)
  *
- * Returns the time argument, converted to seconds. 
- * More info:
- * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_time-to-sec
- *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\MySQL
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\Oracle
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
-class TimeToSec extends FunctionNode
+class ToNumber extends FunctionNode
 {
-    public $time;
+    private $expr1;
 
     /**
      * {@inheritDoc}
@@ -43,8 +39,8 @@ class TimeToSec extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'TIME_TO_SEC(%s)',
-            $this->time->dispatch($sqlWalker)
+            'TO_NUMBER(%s)',
+            $sqlWalker->walkArithmeticPrimary($this->expr1)
         );
     }
 
@@ -55,7 +51,7 @@ class TimeToSec extends FunctionNode
     {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
-        $this->time = $parser->ArithmeticPrimary();
+        $this->expr1 = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }

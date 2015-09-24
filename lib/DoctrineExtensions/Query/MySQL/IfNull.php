@@ -1,6 +1,6 @@
 <?php
 /**
- * ZeDoctrineExtensions MySQL Function Pack
+ * DoctrineExtensions MySQL Function Pack
  * 
  * PHP version 5
  *
@@ -15,29 +15,30 @@
  * 
  */
 
-namespace ZeDoctrineExtensions\Query\MySQL;
+namespace DoctrineExtensions\Query\MySQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * SecToTime(seconds)
+ * IFNULL(expr1, expr2)
  *
- * Returns the seconds argument, converted to hours, minutes, and seconds, as a 
- * TIME value. The range of the result is constrained to that of the TIME data 
- * type. A warning occurs if the argument corresponds to a value outside that range. 
+ * If expr1 is not NULL, IFNULL() returns expr1; otherwise it returns expr2. 
+ * IFNULL() returns a numeric or string value, depending on the context in 
+ * which it is used.
  * More info:
- * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_sec-to-time
+ * https://dev.mysql.com/doc/refman/5.5/en/control-flow-functions.html#function_ifnull
  *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\MySQL
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\MySQL
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
-class SecToTime extends FunctionNode
+class IfNull extends FunctionNode
 {
-    public $seconds;
+    private $expr1;
+    private $expr2;
 
     /**
      * {@inheritDoc}
@@ -45,8 +46,9 @@ class SecToTime extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'SEC_TO_TIME(%s)',
-            $this->seconds->dispatch($sqlWalker)
+            'IFNULL(%s, %s)',
+            $sqlWalker->walkArithmeticPrimary($this->expr1),
+            $sqlWalker->walkArithmeticPrimary($this->expr2)
         );
     }
 
@@ -57,7 +59,9 @@ class SecToTime extends FunctionNode
     {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
-        $this->seconds = $parser->ArithmeticPrimary();
+        $this->expr1 = $parser->ArithmeticPrimary();
+        $parser->match(Lexer::T_COMMA);
+        $this->expr2 = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }

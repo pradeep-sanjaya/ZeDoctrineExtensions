@@ -1,7 +1,7 @@
 <?php
 /**
- * ZeDoctrineExtensions Oracle Function Pack
- * 
+ * DoctrineExtensions MySQL Function Pack
+ *
  * PHP version 5
  *
  * LICENSE:
@@ -12,33 +12,30 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- * 
+ *
  */
 
-namespace ZeDoctrineExtensions\Query\Oracle;
+namespace DoctrineExtensions\Query\MySQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * Translate(expr, from_string, to_string)
+ * Date(expr)
  *
- * TRANSLATE returns expr with all occurrences of each character in from_string 
- * replaced by its corresponding character in to_string. 
+ * Extracts the date part of the date or datetime expression expr. 
  * More info:
- * http://docs.oracle.com/database/121/SQLRF/functions231.htm#SQLRF06145
+ * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_date
  *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\Oracle
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\MySQL
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
-class Translate extends FunctionNode
+class Date extends FunctionNode
 {
-    private $expr;
-    private $fromString;
-    private $toString;
+    public $expr;
 
     /**
      * {@inheritDoc}
@@ -46,10 +43,8 @@ class Translate extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'TRANSLATE(%s, %s, %s)',
-            $sqlWalker->walkArithmeticPrimary($this->expr),
-            $sqlWalker->walkArithmeticPrimary($this->fromString),
-            $sqlWalker->walkArithmeticPrimary($this->toString)
+            'DATE(%s)',
+            $this->expr->dispatch($sqlWalker)
         );
     }
 
@@ -61,10 +56,6 @@ class Translate extends FunctionNode
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
         $this->expr = $parser->ArithmeticPrimary();
-        $parser->match(Lexer::T_COMMA);
-        $this->fromString = $parser->ArithmeticPrimary();
-        $parser->match(Lexer::T_COMMA);
-        $this->toString = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }

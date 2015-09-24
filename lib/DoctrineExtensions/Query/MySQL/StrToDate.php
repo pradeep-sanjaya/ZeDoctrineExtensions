@@ -1,6 +1,6 @@
 <?php
 /**
- * ZeDoctrineExtensions MySQL Function Pack
+ * DoctrineExtensions MySQL Function Pack
  * 
  * PHP version 5
  *
@@ -15,7 +15,7 @@
  * 
  */
 
-namespace ZeDoctrineExtensions\Query\MySQL;
+namespace DoctrineExtensions\Query\MySQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
@@ -31,10 +31,10 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
  * More info:
  * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_str-to-date
  *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\MySQL
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\MySQL
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
 class StrToDate extends FunctionNode

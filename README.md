@@ -12,11 +12,17 @@ Installation
 The recommended way to install `zeineddin/ze-doctrine-extensions` is through
 [composer](http://getcomposer.org/):
 
-1. Add this project and [ze-doctrine-extensions](https://github.com/ZeinEddin/ZeDoctrineExtensions) in your composer.json:
+1. Add this project and [doctrine-extensions](https://github.com/pradeep-sanjaya/doctrine-extensions) in your composer.json:
 
     ```json
+    "repositories": [
+            {
+                "url": "https://github.com/pradeep-sanjaya/doctrine-extensions.git",
+                "type": "git"
+            }
+    ],
     "require": {
-        "zeineddin/ze-doctrine-extensions": "dev-master"
+        "pradeep-sanjaya/doctrine-extensions": "dev-master"
     }
     ```
 

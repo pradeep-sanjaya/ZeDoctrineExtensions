@@ -1,6 +1,6 @@
 <?php
 /**
- * ZeDoctrineExtensions Oracle Function Pack
+ * DoctrineExtensions Oracle Function Pack
  * 
  * PHP version 5
  *
@@ -15,7 +15,7 @@
  * 
  */
 
-namespace ZeDoctrineExtensions\Query\Oracle;
+namespace DoctrineExtensions\Query\Oracle;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
@@ -28,10 +28,10 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
  * More info:
  * http://docs.oracle.com/database/121/SQLRF/functions218.htm#SQLRF06132
  *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\Oracle
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\Oracle
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
 class ToDate extends FunctionNode

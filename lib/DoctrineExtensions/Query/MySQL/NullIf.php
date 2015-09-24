@@ -1,6 +1,6 @@
 <?php
 /**
- * ZeDoctrineExtensions MySQL Function Pack
+ * DoctrineExtensions MySQL Function Pack
  * 
  * PHP version 5
  *
@@ -15,29 +15,29 @@
  * 
  */
 
-namespace ZeDoctrineExtensions\Query\MySQL;
+namespace DoctrineExtensions\Query\MySQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * TimeDiff(expr1, expr2)
+ * NULLIF(expr1, expr2)
  *
- * returns expr1 - expr2 expressed as a time value. expr1 and expr2 are time 
- * or date-and-time expressions, but both must be of the same type.
+ * Returns NULL if expr1 = expr2 is true, otherwise returns expr1. 
+ * This is the same as CASE WHEN expr1 = expr2 THEN NULL ELSE expr1 END. 
  * More info:
- * http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_timediff
+ * https://dev.mysql.com/doc/refman/5.5/en/control-flow-functions.html#function_nullif
  *
- * @category    ZeDoctrineExtensions
- * @package     ZeDoctrineExtensions\Query\MySQL
+ * @category    DoctrineExtensions
+ * @package     DoctrineExtensions\Query\MySQL
  * @license     http://www.opensource.org/licenses/mit-license.html  MIT License
- * @author      Mohammad ZeinEddin <mohammad@zeineddin.name>
+ * @author      Pradeep Sanjaya <sanjayangp@gmail.com>
  */
 
-class TimeDiff extends FunctionNode
+class NullIf extends FunctionNode
 {
-    public $firstTimeExpression = null;
-    public $secondTimeExpression = null;
+    private $expr1;
+    private $expr2;
 
     /**
      * {@inheritDoc}
@@ -45,9 +45,9 @@ class TimeDiff extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return sprintf(
-            'TIMEDIFF(%s, %s)',
-            $this->firstTimeExpression->dispatch($sqlWalker),
-            $this->secondTimeExpression->dispatch($sqlWalker)
+            'NULLIF(%s, %s)',
+            $sqlWalker->walkArithmeticPrimary($this->expr1),
+            $sqlWalker->walkArithmeticPrimary($this->expr2)
         );
     }
 
@@ -58,9 +58,9 @@ class TimeDiff extends FunctionNode
     {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
-        $this->firstTimeExpression = $parser->ArithmeticPrimary();
+        $this->expr1 = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_COMMA);
-        $this->secondTimeExpression = $parser->ArithmeticPrimary();
+        $this->expr2 = $parser->ArithmeticPrimary();
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }
