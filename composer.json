@@ -1,17 +1,17 @@
 {
-    "name": "zeineddin/ze-doctrine-extensions",
+    "name": "pradeep-sanjaya/ZeDoctrineExtensions",
     "description": "A set of Doctrine 2 extensions http://www.doctrine-project.org",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/ZeinEddin/ZeDoctrineExtensions",
+    "homepage": "https://github.com/pradeep-sanjaya/ZeDoctrineExtensions",
     "keywords": [
         "doctrine2"
     ],
     "authors": [
         {
-            "name": "Mohammad ZeinEddin",
-            "email": "mohammad@zeineddin.name",
-            "homepage": "http://www.zeineddin.name/",
+            "name": "Pradeep Sanjaya",
+            "email": "sanjayangp@gmail.com",
+            "homepage": "http://e-biz.lk/",
             "role": "Developer"
         }
     ],
